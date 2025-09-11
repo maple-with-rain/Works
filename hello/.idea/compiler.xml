@@ -4,6 +4,6 @@
     <addNotNullAssertions enabled="false" />
   </component>
   <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding UTF-8 -Xlint:all -Xlint:-overrides -Xlint:-serial -Xdiags:verbose -Xmaxwarns 10 -Xmaxerrs 10" />
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-Xlint:all -Xlint:-overrides -Xdiags:verbose -Xmaxwarns 10 -Xmaxerrs 10" />
   </component>
 </project>

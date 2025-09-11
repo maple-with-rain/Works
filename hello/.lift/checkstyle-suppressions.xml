@@ -270,9 +270,8 @@
               files="(SeamCarver|BurrowsWheeler|MoveToFront).java"/>
 
     <!-- students often use Integer or Double when unit testing Deque and RandomizedQueue -->
-    <!-- students use Integer[] for Merge.indexSort() -->
     <suppress id="Wrapper"
-              files="(Deque|RandomizedQueue|BinarySearchDeluxe|WeakLearner).java"/>
+              files="(Deque|RandomizedQueue|BinarySearchDeluxe).java"/>
 
     <!-- students need to use Integer to check for null entry in Iterable -->
     <suppress id="Wrapper"
