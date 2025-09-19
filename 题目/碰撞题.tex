@@ -1,0 +1,100 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+\hypertarget{ux78b0ux649e}{%
+\subsubsection{碰撞}\label{ux78b0ux649e}}
+
+这是一道简单的碰撞题，主要是为了给大家看一个好玩的思路，题目来源为B站UP主
+3Blue1Brown 的关于 \(\pi\)
+的视频，感兴趣的可以自行观看（对了，还有一个利用光学来解答的视频，也挺好玩的）
+
+\hypertarget{ux5df2ux77e5}{%
+\paragraph{已知}\label{ux5df2ux77e5}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  椭圆方程 \(ax^2+by^2=1\) 直线方程 \(ax+by+k=0\)
+\item
+  在平面直角坐标系中，给定点 \(P\) 和线 \(l\) ，\(l\) 与 \(P\)
+  相交。我们可以简单的将一个 \(y\) 坐标拉长（或缩短）\(k\)
+  倍，显然，此时 \(l\) 与 \(P\) 仍然相交，直线斜率变为原来的 \(k\) 倍
+\item
+  \[y = \sin \theta_1 = \tan \theta_2 = \cos \theta_3\quad \theta_i\in[0,\frac{\pi}{2}]\]
+
+  当 \(y\) 较小时，可以近似认为：
+
+  \[\theta_1=\theta_2=\frac{\pi}{2}-\theta_3=y\]
+\end{enumerate}
+
+现在，请发挥你的联想能力，利用已知解答下面问题：
+
+（PS，主要要求逻辑清晰，并给出正确答案，可以忽略一些论述以减少解答用时）
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  如图，现有两形状完全一致的绝对刚体立方体，质量分别为
+  \(m_2,m_1 = 10000m_2\) ，\(m_2\) 静止，\(m_1\) 以速度 \(v_1\) 向
+  \(m_2\)
+  运动，求解：发生多少次碰撞（包括方块之间的碰撞和方块与墙体的碰撞）后两方快之间不再碰撞。（两物体面对面，发生对心碰撞，且忽略碰撞过程中的能量损失）
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  OK，完成了上面那个题目，我们
+\end{enumerate}
+
+\end{document}
