@@ -1,0 +1,1032 @@
+\documentclass[a4paper,10pt]{ctexart}
+\usepackage{graphicx} 
+\usepackage{titlesec}
+\usepackage{indentfirst}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{subfigure}
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{amsmath, amsthm, amssymb, appendix, bm, hyperref, mathrsfs}
+\usepackage{mathabx}
+\usepackage{bm}
+\usepackage{graphicx, enumerate, cleveref, tikz}
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\usepackage{xeCJK} % 加载 xeCJK 宏包
+
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float} 
+
+\usepackage{ragged2e}
+
+\usepackage{booktabs,tabularx}
+
+
+\usepackage{booktabs} % 用于更漂亮的表格线条
+\usepackage{array}    % 提供额外的表格功能
+\usepackage{longtable} % 用于长表格
+\usepackage{boldline} % 用于加粗表格边框
+\usepackage{tikz}
+\newcommand\parallelogram{%
+    \mathord{\text{%
+        \tikz[baseline] \draw (0,.1ex) -- (.8em,.1ex) -- (1em,1.6ex) -- (.2em,1.6ex) -- cycle;
+    }}
+}             %用于便捷地使用\parallelogram平行四边形符号
+\newcommand{\rmd}{\mathrm{d}} %使用正体微分符号
+
+\title{\textbf{}}
+\renewcommand{\baselinestretch}{1.5}
+\setlength{\parindent}{2em}
+\renewcommand{\abstractname}{\Large\textbf{摘要}}
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\kaishu\zihao{5} 北京理工大学第七届“博约杯”新生物理竞赛}
+\fancyfoot{}
+
+\renewcommand{\headrulewidth}{1pt}
+\catcode`\。=\active         %或者=13
+\newcommand{。}{．}
+
+\begin{document}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection.}{1em}{}
+\renewcommand{\thesection}{\Alph{section}}
+
+
+
+\begin{titlepage}
+\thispagestyle{fancy} % 这一行会使封面页加上页眉
+\centering
+
+
+% 以下开始封面页
+
+
+\vspace*{5em}
+
+\begin{center}
+    {\CJKfamily{SimSun}\bfseries\fontsize{22pt}{22pt}\selectfont 北京理工大学第七届“博约杯”新生物理竞赛}
+\end{center}
+
+
+
+\vspace{3cm}
+
+% \CJKfamily{KaiTi}\bfseries\fontsize{16pt}{16pt}\selectfont
+
+
+% \vspace*{\fill}
+
+
+
+
+\begin{center}
+\large
+\begin{longtable}{!{\vrule width 1.5pt}c|c|c!{\vrule width 1.5pt}} % 设置左右竖线加粗
+\hlineB{3}  % 加粗外边框的上边框
+\textbf{题目序号} & \textbf{题目名称} & \textbf{题目页码} \\
+\hlineB{3}  % 加粗第一行的下边框
+A & 小知识大杂烩 & $1 \sim 2$ \\
+\hline  % 正常边框
+B & 热身运动 & $ 3\sim 4$ \\
+\hline
+C & “数学物理方法” & $5 \sim 7$ \\
+\hline
+D & 新知万花筒 & $8\sim 11$ \\
+\hline
+E & 飓风“站”魂 & $12 \sim 13$ \\
+\hline
+F & 最初的物理 & $14 \sim 16$ \\
+\hline
+G & 数据科学中的物理学& $17 \sim  18$ \\
+\hline
+H & 不可爱猫猫生成器 & $19 \sim 21$ \\
+\hline
+I & 电子的涟漪 & $22 \sim 24$ \\
+\hline
+J & 时空的对称性 & $25 \sim 28$ \\
+
+\hlineB{3}  % 加粗外边框的下边框
+\end{longtable}
+\end{center}
+
+
+
+\vspace{5.5em}
+
+\begin{center}
+{\CJKfamily{SimSun}\fontsize{16pt}{16pt}\selectfont 2025年10月9日}\\{\CJKfamily{SimSun}\fontsize{16pt}{16pt}\selectfont 18:30$\sim$21:30}
+\end{center}
+
+\end{titlepage}
+
+\date{}
+
+
+\thispagestyle{fancy} % 这一行会使封面页加上页眉
+
+\newpage
+
+\begin{center}
+    {\CJKfamily{SimSun}\bfseries\fontsize{22pt}{22pt}\selectfont 考生注意事项\& 符号与公式声明}
+\end{center}
+
+1. 考生务必将自己的个人信息填写在答题纸上。
+
+2. 考生应先阅读全卷，检查有无缺页、漏印、错印。
+
+3. 回答A题时，请按照题目要求，将解释说明文字或数量级估计的步骤写在试卷上。
+
+4. 回答B$\sim$L题时，请将答案、必要方程和必要文字说明写在答题纸上。
+
+5. 所有答案写在答题纸上，写在本试卷和草稿纸上无效。
+
+6. 考试结束后请上交答题纸，试题卷与草稿纸可带回。
+
+7. A、B、C、D四题均不需要完全作答。其中，A题需从20个小题中选出10个作答；B、C、D题需从每题所属的两个或三个小题中选出一道作答。如果在A题中回答的小题数多于10个，则只计算作答问题中前10题的分数；如果在B、C、D题中多做，则按照其中的第一小题计分。
+
+8.H、I、J三题只有一道题的分数计入总分，如果某题的得分超过40分，可以额外计入总分，其他情况只计入答题卡上的第一道题。
+
+9.本场考试允许携带一张A4纸入内。除此之外，不能携带任何多余的书籍、参考资料。
+
+10.考生仅允许携带无通讯与编程功能的计算器，不得携带除此以外的电子设备，如有携带，可放在讲台处待考试结束取走。
+
+
+\newpage
+
+% 从这一页开始展示页码
+\newpage
+\fancyfoot[C]{\thepage} % 在页脚中间显示页码
+\pagenumbering{arabic}  % 使用阿拉伯数字页码
+\setcounter{page}{1}    % 从第1页开始编号
+
+
+
+\section{小知识大杂烩（40分）}
+
+ 本题分为\textbf{第一部分：简答题部分}和\textbf{第二部分：数量级估计部分}，共计20小题，请从中\textbf{选择10个小题}作答，将你选择的题号填写在答题卡上的指定位置。每小题4分，\textbf{如果多做，只计算作答问题中前10题的分数}。在作答第一部分时，请在\textbf{50字}之内对每小题的问题做出解释（可以包含必要的计算）；在作答第二部分时，若无额外说明，则写出估算的数量级（以$10^n$的格式回答，例如：一层楼高约$10^0$米），并简要给出估算步骤。
+
+\begin{center}
+     \textbf{第一部分：简答题}
+\end{center}
+
+
+
+ \textbf{（1）}杨振宁与李政道提出宇称不守恒理论，主要是针对哪一种基本相互作用过程？
+
+ \textbf{（2）}在镧系元素中，连续的原子半径减小现象被称为“镧系收缩”。请指出导致这一现象的主要电子效应是什么？
+
+ \textbf{（3）}请列举至少三种能够获得低温（通常指低于约120K）的实验技术或方法，并分别简述其基本原理。
+
+ \textbf{（4）}请从物理学的角度解释，为何将肉类等含水食物放入充分预热的热锅中翻炒不易粘锅。
+
+ \textbf{（5）}为何将两颗葡萄紧密放置并在微波炉中加热时，容易产生电火花甚至等离子体（即“爆炸”现象）。
+
+ \textbf{（6）}一款依靠电池驱动、指针式的石英钟，当其电池电量耗尽停止走动时，秒针最有可能停止在表盘上的哪个数字附近？请说明主要原因。
+
+ \textbf{（7）}当用手机摄像头直接拍摄电脑屏幕时，画面中常会出现条纹或水波纹。请解释这主要是由什么光学现象造成的。
+
+ \textbf{（8）}请简述耳机主动降噪功能的实现原理；
+
+ \textbf{（9）}请简述3D电影眼镜镜片利用的光学原理；
+
+ \textbf{（10）}为什么长波信号可以向大气层发射，而短波信号不行？
+
+ \textbf{（11）}“柳叶鸣蜩绿暗，荷花落日红酣”为什么我们看到的夕阳是红色的？在大气中充满大颗粒尘埃的火星上看夕阳，它也是红色的吗？
+
+ \textbf{（12）}以下哪个物理对象因“能高效吸收广谱入射电磁波，且热辐射特性接近辐射定律”，可近似看作黑体?：天然纯炭块；开小窗的封闭房间；物理老师乌黑油亮的头发。
+
+\textbf{（13）}为什么人眼的能感受到的光波频段在400-760nm之间?
+
+\begin{center}
+     \textbf{第二部分：数量级估计}
+\end{center}
+
+\textbf{（14）}《中国褐煤行业发展趋势分析与投资前景研究报告》指出，击杀一个凋零骷髅获得平均2个煤炭，9个煤炭合成$1 \mathrm{m}^3$的煤炭块。煤炭的热值为$3 \times 10^4 \mathrm{kJ/kg}$，密度与水接近。请问为了给理教楼供电，需要每年击杀多少只凋零骷髅？
+%是否需要在理教楼前加限定词？
+
+\textbf{（15）}假设某煎锅热熟一块$1\mathrm{cm}$厚度的牛排需要3分钟，请问热熟一块厚度与理教一层楼高相当的巨型牛排要几分钟?；
+
+\textbf{（16）}安德烈（Andre K. Geim）通过机械剥离法,用胶带粘连样本制取出了单层石墨烯，获得了2010年的诺贝尔奖。如图所示，石墨烯碳原子层间的吸引能为：$e = 745 \mathrm{kJ/mol}$,胶带转角处的半径约为1mm,分子间有效作用距离为$l = 30 \mathrm{nm} $。请你估算撕取一层石墨烯的理想手速（m/s）；
+
+\begin{figure}[htbp] % [位置参数：h=此处，t=顶部，b=底部，p=单独页面]
+    \centering % 图片居中
+    \includegraphics[width=0.4\textwidth]{机械剥离.jpg} % 使用占位图
+    \caption{机械剥离法示意图} % 图片标题
+    \label{fig:example} % 引用标签
+\end{figure}
+
+
+
+\textbf{（17）}在游戏《艾尔登法环》中，玩家需要烧掉比自己身高高万倍，比自己腰围粗千倍的黄金树，请估计这会放出多少J能量。
+
+\textbf{（18）}南操场举办活动时，主席台的声音可以传播到疏桐园与静园，请你估算两栋宿舍楼听到的最大声音分贝差（本题答案取整，不需要写数量级）。记声功率为$W$,参考功率$W_0$为一固定值，则分贝计算方法为：$ L_W = 10 \log_{10} \left( \frac{W}{W_0} \right) \, \text{dB} $
+
+\begin{figure}[htbp] % [位置参数：h=此处，t=顶部，b=底部，p=单独页面]
+    \centering % 图片居中
+    \includegraphics[width=0.3\textwidth]{北理工地图.jpg} % 使用占位图
+    \caption{良乡地图节选} % 图片标题
+    \label{fig:example} % 引用标签
+\end{figure}
+
+
+\textbf{（19）}已知固态硬盘每存储1bit数据，浮栅晶体管增重约1个电子($m_e \approx 0.5\; \mathrm{MeV/c^2}$),平均一个汉字约占3字节，请问固态硬盘存入本卷A题中所有汉字后，其浮栅晶体管增重几$\mathrm{kg}$？
+
+
+\textbf{（20）}估算:多少节干电池串联，才能使$1 \mathrm{cm}$厚的真空中平行板电容器产生的电场与氢原子中电子感受到的静电场大小相当。（已知玻尔半径约为$5 \times 10^{-11}\mathrm{m}$）
+
+
+
+
+
+
+\newpage
+
+\include{B题拼盘}
+
+\include{C题拼盘}
+
+
+
+\section{新知万花筒(60分)}
+本关考验你新知学习能力，包含两个\textbf{独立}的小题，请从中\textbf{选一题}作; 将你选择的题号写在答题纸上，若两小题都做，则\textbf{只按第一小题}的作答计分。
+\subsection{光全息术}
+\subsubsection{准备工作}
+我们引入一种高中可能学过的复数表示方法
+\[
+\mathrm{e}^{\mathrm{i}\theta} = \cos\theta + \mathrm{i}\,\sin\theta
+\]
+其中 $\mathrm{i}=\sqrt{-1}$ 是虚数单位。利用上述公式，我们可以将波动表示为复数形式
+\[
+\widetilde{E} = E_0 \mathrm{e}^{\mathrm{i}(kz - \omega t + \phi_0)}
+\]
+其中 $E_0$ 是振幅，$k$ 是波数，$\omega$ 是角频率，$t$ 是时间，$z$ 是传播方向的坐标，$\phi_0 $是初相。实际的物理量是复数的实部
+\[
+\mathrm{Re}(\widetilde{E}) = E_0 \cos(kz - \omega t + \phi_0)
+\]
+定义复振幅为
+\[\widetilde{E}_0 = E_0 \mathrm{e}^{\mathrm{i}(kz+\phi_0)}\]
+因此复数表示可以写为
+\[\widetilde{E} = \widetilde{E}_0 \mathrm{e}^{-\mathrm{i} \omega t}\]
+
+众所周知，光也是一种波，因此我们可以用上述复数形式来表示光波，例如上式就表示一束沿 $z$ 轴正方向传播的平面波。
+
+光强与复振幅的模方成正比，即
+\[I \propto (\widetilde{E}_0)^2\]
+  \textbf{(1.1)(5分)}利用能量守恒定律，证明点光源发出的球面波的振幅$A$与距离$r$成反比，并写出点光源发出的球面波的复振幅$\widetilde{u}(r) $。\\
+  \textbf{(1.2)(3分)} 复振幅为$\widetilde{E} = E_0 \mathrm{e}^{\mathrm{i}(k_x x+k_y y+k_z z)}$的光沿着哪个方向传播？$k_x,k_y,k_z$分别表示什么物理意义？
+
+现在讨论两束相干光的干涉。设两束光在同一位置的复振幅分别为 $\widetilde{E}_1$ 和 $\widetilde{E}_2$，则叠加后的总复振幅为
+\[\widetilde{E} = \widetilde{E}_1 + \widetilde{E}_2\]
+此处总光强为
+\[I \propto (\widetilde{E})^2 = (\widetilde{E}_1 + \widetilde{E}_2)^2 = (\widetilde{E}_1)^2 + (\widetilde{E}_2)^2 + \widetilde{E}_1 \widetilde{E}_2^* + \widetilde{E}_1^* \widetilde{E}_2\]
+其中最后两项 $\widetilde{E}_1 \widetilde{E}_2^* + \widetilde{E}_1^* \widetilde{E}_2$ 是干涉项，$\widetilde{E}_1^* $表示$\widetilde{E}_1$的复共轭。\\
+  \textbf{(1.3)(7分)} 设两束光的复振幅分别为 $\widetilde{E}_1 = E_0\mathrm{e}^{\mathrm{i}k_z z}$ 和 $\widetilde{E}_2 = E_0 \mathrm{e}^{\mathrm{i}(k_x x+k_z z+\phi)}$，求在$z=0$处的总光强 $I$ 与 $k_x,x,\phi$ 的关系，并写出光强为最大和最小时$x$的值。
+
+本题中可能用到的小量近似公式
+\[\sqrt{1+x} \approx 1 + \frac{x}{2},\quad (|x| \ll 1)\]
+\[\frac{1}{1+x} \approx 1 - x ,\quad (|x| \ll 1)\]
+\[\cos x \approx 1 - \frac{x^2}{2},\quad (|x| \ll 1)\]
+\[\sin x \approx x,\quad (|x| \ll 1)\]
+\[\mathrm{e}^{x} \approx 1 + x,\quad (|x| \ll 1)\]
+
+
+\subsubsection{题目内容}
+全息术或全息照相，能够再现实景物的真三维图像，它是对传统照相技术或录像技术的一次革命。全息照相是一个无透镜两步成像技术。
+第一步，采用光波干涉而实现对物光波前的全息记录 (wavefront holograph)；第二步，通过光波衍射而实现物光波前的再现 (wavefront reconstruction)。
+
+\begin{figure}[htbp]
+  \centering
+  % page=1 指定 PDF 的第 1 页；trim=left bottom right top，单位可写 cm、mm 等；clip 使裁剪生效
+  \includegraphics[width=0.4\textwidth,page=1,trim=1cm 2cm 1cm 2cm]{holographic light.pdf}
+  \caption{全息光示意图}
+  \label{fig:mypdf}
+\end{figure}
+如图所示，一张平面感光底片放在 $z=0$ 的 $xy$ 平面上。参考光为一束与 $z$ 轴成角 $\theta$ 的平面波，位于 $xz$ 平面内，由 $z>0$ 入射。
+物点坐标为 $(x_0,0,-d_0)$。使用傍轴近似，即$d_0$远大于底片的尺寸。物光是物点反射参考光后形成的球面波。
+底片同时接受参考光和物光的干涉，显影定影后形成全息片。\\
+  \textbf{(2.1)(15分)} 假设物光在$x=0,y=0,z=0 $处振幅为 $B_0$，推导物光在底片上的复振幅 $\widetilde{O}(x,y)$。\\
+  \textbf{(2.2)(15分)} 利用(2.1)的结果，假设参考光振幅为$A_0$，全息片的透光率 $\widetilde{t}(x,y)$ 由$\widetilde{t}(x,y) = t_0+\beta(\widetilde{E})^2 $确定，其中$t_0,\beta $为常量，
+  $(\widetilde{E})^2 $为入射光复振幅的模方。推导该全息片的透光率 $\widetilde{t}(x,y)$。\\
+  \textbf{(2.3)(15分)} 光经过全息片后复振幅变为$\widetilde{E}=\widetilde{t}(x,y)\widetilde{E_0}$。利用(2.1)与(2.2)的结果，证明在用相同参考光照明该全息片时，
+  全息片将衍射出两类球面波：一类相当于从物点发出的球面波(虚像)，另一类相当于来自物点的对称点(实像)。
+
+
+% {
+%\color{blue}
+%阅读完蓝色字体后请注释掉蓝色字体,蓝色字体仅供参考：
+%
+%\begin{itemize}
+%    \item (1.1)要求使用能量守恒定律，题目中是否应指出光强和能流密度的关系？
+%    \item (2.2)中的“第四问”和(2.3)中“前两问”可能需要修改，具体指出是哪些小问。
+%\end{itemize}
+%
+%}
+\subsection{格波之舞：从原子振动到晶体热容的理论探索}
+
+在物理学中，一个伟大理论的标志是它能从简单的微观模型出发，预测和解释宏观世界的复杂现象。我们对固体材料的认识正是这样一个典范：在宏观尺度，我们用连续介质理论描述其力学和声学行为；但在微观尺度，固体是由原子在空间中周期性排列构成的离散“晶格”。
+
+这种原子晶格的集体振动，是固体一切热学性质的根源。19世纪的物理学家发现，大多数固体在室温下的摩尔热容（物体温度升高$1K$所吸收的热量）都趋于一个常数$3R$（杜隆-珀蒂定律），但该定律在低温下完全失效。这一“乌云”最终被爱因斯坦和德拜驱散，他们创造性地提出了\textit{声子 (Phonon)} 的概念——即晶格振动的能量子——完美地解释了实验现象。
+
+在本题中，我们将沿着这些物理学先驱的足迹，踏上一段从微观模型到宏观预测的理论探索之旅。我们将从最简单的“弹簧-小球”原子链模型出发，推导出离散晶格中独特的波动模式——\textit{格波 (Lattice Wave)}；并以此为基础，引入德拜模型的思想，最终揭示晶体热容在不同温度下的奥秘。
+
+\subsubsection{最简单的模型——一维单原子链 (15分)}
+
+我们首先考虑一个无限长的一维原子链。无数个质量均为$ m $的原子，由劲度系数为 $K$ 的相同弹簧相连。系统平衡时，相邻原子间距（晶格常数）为 $a$。我们只考虑原子沿链方向的微小振动。设第 $n$ 个原子偏离其平衡位置 $x_n = na$ 的位移为 $u_n(t)$。
+\\
+\textbf{(1.1) 建立运动方程 (3分)}根据牛顿第二定律，写出第 $n$ 个原子的运动方程。\\
+\\
+\textbf{(1.2) 求解波动模式与色散关系 (6分)}由于原子链的周期性，我们猜测其上存在行波解：$u_n(t) = A e^{i(kna - \omega t)}$。其中，$k$ 是波矢，$\omega$ 是角频率。将此解代入运动方程，推导出角频率 $\omega$ 和波矢 $k$ 之间必须满足的\textbf{色散关系 (Dispersion Relation)} $\omega(k)$。\\
+\\
+\textbf{(1.3) 分析与讨论：长波与短波 (6分)}你得到的色散关系应为 $\omega(k) = \sqrt{\dfrac{4K}{m}} \left| \sin\left(\dfrac{ka}{2}\right) \right|$。下进行如下讨论：
+
+长波近似 $(ka \ll 1)$: 证明在此近似下，色散关系为线性关系 $\omega \approx v_s k$，并求出这个一维原子链上的“声速” $v_s$。这说明了什么？
+
+短波极限: 与声波不同，格波的频率存在一个上限，即\textbf{截止频率 (Cutoff Frequency)} $\omega_{max}$。求出其大小，并简要说明其物理意义。
+
+\subsubsection{更进一步——一维双原子链 (20分)}
+
+现在我们考虑一个更复杂的模型：质量分别为 $m_1$ 和 $m_2 (m_1 > m_2)$的两种原子交替排列，相邻间距为 $a/2$，弹簧劲度系数仍为 $K$。一个重复单元的长度为 $a$。设 $m_1$ 原子（位于 $na$）的位移为 $u_{2n}(t)$，$m_2$ 原子（位于 $(n+1/2)a$）的位移为 $u_{2n+1}(t)$。\\
+\\
+\textbf{(2.1) 建立运动方程组 (4分)}分别写出 $m_1$ 原子和 $m_2$ 原子的运动方程，得到一个耦合方程组。\\
+\\
+\textbf{(2.2) 求解色散关系 (8分)}假设行波解：$u_{2n}(t) = A_1 e^{i(k(na) - \omega t)}$, \quad $u_{2n+1}(t) = A_2 e^{i(k(n+1/2)a - \omega t)}$。将解代入方程组，通过求解系数行列式为零的条件，推导出关于 $\omega^2$ 的色散关系方程。\\
+\\
+\textbf{(2.3) 声学支、光学支与带隙 (8分)}求解出的色散关系包含两个分支。
+\\
+声学支与光学支: 在长波极限$(k \to 0)$下，证明其中一个分支的频率 $\omega \to 0$（声学支），另一个分支的频率趋于一个非零的定值（光学支）。
+
+带隙: 计算在 $k = \pi/a$ 时，声学支的最高频率和光学支的最低频率。你会发现它们之间存在一个频率空隙，即\textbf{带隙 (Band Gap)}。这个现象在单原子链中是否存在？它意味着什么？
+
+\subsubsection{从格波到热容——德拜模型的启示 (20分)}
+
+格波的振动模式构成了晶格储热的“仓库”。每个频率为 $\omega$ 的模式被量子化后，称为声子，其平均能量由普朗克分布给出：$\langle E(\omega) \rangle = \dfrac{\hbar\omega}{e^{\hbar\omega/(k_B T)} - 1}$。晶体的总内能 $U$ 就是所有振动模式能量的总和。
+\\
+\textbf{(3.1) 态密度 (6分)}对于每一个波矢 $\vec{k}$，存在三个独立的振动模式：一个振动方向平行于 $\vec{k}$ 的纵波（声速为 $v_L$），以及两个振动方向垂直于 $\vec{k}$ 的横波（声速为 $v_T$）。因此，总的态密度是这三个分支的贡献之和：$g_{total}(\omega) = g_L(\omega) + 2g_T(\omega) = \dfrac{V\omega^2}{2\pi^2 v_L^3} + \dfrac{2V\omega^2}{2\pi^2 v_T^3} = \dfrac{V\omega^2}{2\pi^2}\left(\dfrac{1}{v_L^3} + \dfrac{2}{v_T^3}\right)$为了简化计算，德拜模型定义了一个等效的平均声速 $v_s$，它满足关系式：$\dfrac{3}{v_s^3} = \dfrac{1}{v_L^3} + \dfrac{2}{v_T^3}$使用这个等效声速，总的态密度可以简洁地表示为（本题后续计算请使用此公式）：$g(\omega) = \dfrac{3V\omega^2}{2\pi^2 v_s^3}$德拜模型的核心思想是：\textbf{晶格振动的总模式数应等于其总自由度 $3N$}。为此，他引入了一个德拜截止频率 $\omega_D$，频率高于此值的模式不存在。请利用积分条件 $\int_0^{\omega_D} g(\omega)d\omega = 3N$，推导出德拜频率 $\omega_D$ 与原子数密度 $N/V$ 和等效声速 $v_s$ 之间的关系。
+\\
+\textbf{(3.2) 晶体内能与热容的极限行为 (8分)}晶体的总内能 $U$ 的积分为：$U = \int_0^{\omega_D} \langle E(\omega) \rangle g(\omega) d\omega$。我们来研究其极限行为。定义德拜温度 $\Theta_D = \hbar\omega_D/k_B$。
+
+高温极限 ($T \gg \Theta_D$): 证明在此条件下，晶体的摩尔热容 $C_{V,m} \to 3R$，即恢复了经典的杜隆-珀蒂定律。（提示：利用近似 $e^x \approx 1+x$ 当 $x \to 0$）
+
+低温极限 ($T \ll \Theta_D$): 证明在此条件下，晶体的热容 $C_V$ 与 $T^3$ 成正比，这就是著名的德拜 $T^3$ 定律。（提示：可令 $x = \hbar\omega/(k_B T)$ 进行变量替换，并将积分上限近似为 $\infty$。已知定积分：$\int_0^\infty \dfrac{x^3}{e^x-1}dx = \dfrac{\pi^4}{15}$）
+\\
+\textbf{(3.3) 物理图像 (6分)}为什么在高温下，量子效应不明显，热容趋于经典值？而在低温下，是哪些声子（高频还是低频）对热容起主要贡献，从而导致了与高温完全不同的 $T^3$ 行为？请简要阐述你的物理理解。
+
+\subsubsection{总结与升华 (5分)}请回顾你的全部推导过程，简要总结：
+
+我们从一个简单的“弹簧-小球”力学模型出发，如何一步步构建起对晶体热容这样复杂的宏观现象的理解？这个过程中，哪些关键的物理概念（如色散关系、态密度、频率截断等）起到了桥梁作用？
+
+经典物理与量子物理在本理论框架中是如何交织融合，并各自解释了现象的哪个方面？
+
+\newpage
+
+\section{飓风“站”魂（40分）}
+    物理学研究世界，而微分方程优美地描绘了世界的千变万化，但我们所能求解的微分方程少之又少。摄动法是一种巧妙的求解微分方程近似解的方法，其核心思想在于将微分方程的解设为一个稳定解加上在稳定解周围的微小扰动，我们只需要研究扰动的性质就能大体掌握微分方程的解了，这大大降低了微分方程复杂性，使我们更加了解物理世界。
+\subsection{天体稳定性研究}
+许多系统的运动轨道都有类似的稳定性，以天体轨道为例，即使地球受到宇宙环境的微小扰动，仍然能维持原有的轨道绕太阳做圆周运动。
+
+已知某一天体的轨道运动满足：
+\[h^2u^2 \left(\frac{\rmd^2u}{\rmd\theta^2}+u \right)=P(u)\]
+\[P(u)=k^2u^2\]
+
+$h$为常数，\(u=1/r\)，r为轨道的半径，\(\theta\) 为天体公转的角度 是否需要指明是极坐标系的极角？
+, 对于圆形轨道的某个半径\(u_0\),自然有\(\dfrac{\rmd u_0}{\rmd\theta}=0\)。
+
+
+为了研究扰动，我们令\(u=u_0+\xi\)，其中\( \xi\)为小量（$\xi \ll 1$），代入上式后我们得到：
+\begin{equation}
+    \frac{d^{2} \xi}{d \theta^{2}}+u_{0}+\xi=\frac{P\left(u_{0}+\xi\right)}{h^{2}\left(u_{0}+\xi\right)^{2}} .
+\end{equation}
+
+把上式的右边展为\(\xi\)的级数，得：
+\begin{equation}
+    \begin{aligned}
+\frac{P\left(u_{0}+\xi\right)}{h^{2}\left(u_{0}+\xi\right)^{2}} & =\frac{1}{h^{2} u_{0}^{2}}\left(1+\frac{\xi}{u_{0}}\right)^{-2}\left(P_{0}+\xi P_{0}^{\prime}+\frac{\xi ^2P_{0}^{\prime\prime}}{2}\cdots \cdots\right) \\
+& =\frac{P_{0}}{h^{2} u_{0}^{2}}\left[1+\xi\left(\frac{P_{0}^{\prime}}{P_{0}}-2 \frac{1}{u_{0}}\right)+\cdots \cdots\right]
+\end{aligned}
+\end{equation}
+
+式中 \(P^{\prime}=\dfrac{\rmd P}{\rmd u}\),而下标0表示当\(u=u_0\)时所算出的值. 保留一阶小量我们有：
+\begin{equation}
+    \frac{d^{2} \xi}{d \theta^{2}}+C_{1} \xi=C_{2},
+\end{equation}
+\begin{equation}
+    C_{1}=1-\frac{P_{0}}{h^{2} u_{0}^{2}}\left(\frac{P_{0}^{\prime}}{P_{0}}-\frac{2}{u_{0}}\right)=3-\frac{u_{0} P_{0}^{\prime}}{P_{0}}
+\end{equation}
+而\(C_2\)为另一常数,其值对问题的性质无关.
+
+
+在\(C_1>0,C_1<0,C_1=0\)的情况下，上述方程的解分别为：
+\begin{equation}
+    \begin{array}{l}
+\xi=A \cos \left(\sqrt{C_{1}} \theta\right)+B\left(\sqrt{C_{1}} \theta\right)+\frac{C_{2}}{C_{1}}, \\
+\xi=A \cosh \left(\sqrt{-C_{1}} \theta\right)+B \sinh \left(\sqrt{-C_{1}} \theta\right)+\frac{C_{2}}{C_{1}}, \\
+\xi=\frac{1}{2} C_{2} \theta^{2}+A \theta+B .
+\end{array}
+\end{equation}
+在这些解中,只有\(C_1>0\)时,\(\xi\)永远保持为小量，其它都将随\(\theta\)的增大而趋于无限大.因此，半径为\(\dfrac{1}{u_0}\)的圆形轨道：
+\begin{equation}
+C_1=3-\frac{uP^{\prime}}{P}=3-2=1>0
+\end{equation}
+因此天体绕恒星的公转轨道是稳定的，即使受到外界环境的微扰，也不会脱离原本的轨道。
+
+\subsection{陀螺的稳定性研究}
+众所周知，陀螺在转动的过程中，会有“点头的运动”，这种运动被叫做章动，章动的运动方程可以表达如下
+\[A^2 \left(\frac{\rmd u}{\rmd t}\right)^2=P(u)\]
+\[P(u)=A(2E-2An^2)(1-u^2)-(L_Z-2Anu)^2-2AMghu(1-u^2)\]
+其中$n$ 为自转速度，\(A,E,M,g,h,L_z\)为常数且均大于0，\(u=cos\theta\)，\(\theta\in(0,\pi/2)\)为章动角的大小。
+请仿照上述过程，研究陀螺受到微扰后的运动情况。\\
+\textbf{（2.1）（10分）}    请证明对于章动角的微扰也有如下形式（尝试保留二阶小量）\[ \frac{\rmd^{2} \xi}{\rmd t^{2}}+C_{1} \xi=C_{2}\]
+\\
+\textbf{（2.2）（15分）}     求出在 $n$ 很大的情况下 ，\(C_1\)的具体形式，并说明为什么这时候陀螺受到微扰也很稳定。
+\\
+\textbf{（2.3）（15分）}  求出在 $n$ 趋于 $0$ 的情况下，\(C_1\)的具体形式，并解释为什么陀螺会倒下。（提示：结合平衡条件\(C_2=0\)来化简\(C_1\)）
+
+
+
+
+\newpage
+
+\section{ 最初的物理（40分）}
+在开普勒总结出行星运动的三大规律之后，牛顿由自己提出的三大定律出发进一步得到了引力定律。本题主要参考牛顿在《自然哲学的数学原理》一书的推演过程。
+\paragraph{} \textbf{Iam ostendo structuram Systematis Mundi.}
+\begin{flushright}
+ ----Isaac Newton   
+\end{flushright}
+  
+\subsection{开普勒三定律与牛顿三定律基本内容}
+
+以下是对开普勒三定律和牛顿三定律的表述：
+
+开普勒第一定律（K-1）：行星绕太阳的轨道是椭圆，太阳位于椭圆的一个焦点上。（轨道定律）
+
+开普勒第二定律（K-2）：行星与太阳的连线在相等时间扫过的面积相同。（面积定律）
+
+开普勒第三定律（K-3）：轨道半长轴的立方正比于轨道周期的平方。（周期定律）
+
+牛顿第一定律（N-1）：一切物体保持匀速直线运动状态或静止状态，除非作用在它上的力迫使它改变这种状态。（惯性定律）
+
+牛顿第二定律（N-2）：物体的加速度$a$与作用在它上面的力$f$成正比，与物体的质量$m$成反比，且加速度方向与力的方向相同。（加速度定律）
+
+牛顿第三定律（N-3）: \underline{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}
+    \\
+    \textbf{（1.1）（2分）}请你补充定律N-3，并由N-2给出：受恒力$F$作用于质量$m$的质点由静止加速过程中位移与时间的关系；
+
+\subsection{面积定律}
+
+开普勒三定律是牛顿三定律的必然结果。我们首先试图从牛顿三定律得出K-2:
+
+    我们将太阳与行星都看作质点，不难推断出引力沿着行星-太阳连线,则用第一定律N-1和运动的合成即可证明开普勒第二定律。图见下一页:固定在太阳参考系，用$O$表示太阳，$\wideparen{GB}$是任意弧线，代表行星运动的轨迹；$be$是其切线，切点为$C$,代表行星在$C$处速度的方向。$CE$、$CB$是割线，分别表示上一瞬间和下一瞬间行星的位移。
+    \\
+    \textbf{（2.1）（5分）}试证明，根据惯性定律N-1，若行星运动到$C$后引力突然消失、经过一个与到$CE$时间间隔相当的一瞬$t$后，行星的位移是$Ce$，则$S_{\triangle CEO}=S_{\triangle CeO}$。
+    \\
+    \textbf{（2.2）（5分）}若取$Cb=Ce$，将$B$看作$C$反向运动相同时间$t$后的位置。当$t \to 0$，曲边三角形$CEO$与$\triangle CEO$面积相同(此后我们将常常使用这种极限)。请由此证明面积定律（K-2）：对任意时间扫过的面积$\triangle S \propto t$。
+
+
+\subsection{准备工作}
+如图，做$ET$垂直$CO$于$T$点(未画出)。其中$\wideparen{CE}、\wideparen{CB}$ 时间间隔仍不变,当时间间隔$t$极短，弧极短时，可定义“弧之矢”$Cv$。
+\vspace{-1em}
+\paragraph{定义：弧之矢}
+若线段一端为弧的中点（要求弧长极短），延长后平分该弧的弦，且过力的中心，则该线段称为该弧的“弧之矢”。 
+%  \textcolor{blue}{是否应该为“过弧的中心”而不是“过力的中心”？因为这是一个纯几何定义（？}   不是，这是牛顿提的概念，且非圆弧没有中心的定义。实际上此处的定义只在弧非常短的时候才是运动的改变（所谓微积分思想），牛顿的处理比较模糊
+\vspace{0.85em}
+\\
+\textbf{（3.1）（4分）}试说明（1.1）问中算得的位移量就是行星轨迹$ \wideparen{BE}$的"弧之矢"$Cv$的长度;请由面积定律证明引力 $f$ 满足引理1。
+
+\vspace{-1em}
+\paragraph{引理1：}
+\quad
+\begin{equation}
+  f \propto \frac{Cv}{ {CO}^{2} \cdot {ET}^2}
+\end{equation}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.4]{图:行星运动/行星运动2.png}
+    \caption{开普勒第二定律与弧之矢}
+    \label{椭圆轨道}
+\end{figure}
+\vspace{0.85em}
+\paragraph{}
+为了便于后续证明，我们给出椭圆的外切平行四边形的定义；
+
+\vspace{-1em}
+
+
+\paragraph{定义：外切平行四边形与共轭直径}
+某一四边形是椭圆的外切平行四边形，若其任意边都与椭圆相切，且其是平行四边形。该平行四边形的两条对边中点连线在椭圆上截得的线段过椭圆的中心，称为一对共轭直径(长短轴就是一对特殊的共轭直径)。
+
+\vspace{0.85em}
+
+
+为了简化证明过程，你可以直接使用以下两个引理。
+
+\vspace{-1em}
+
+
+\paragraph{引理2：}
+\begin{equation}
+S_{\parallelogram ABCD} = S_{\parallelogram A ' B' C' D'} \, \text{  ,若} \, \parallelogram ABCD \text{与} \parallelogram A ' B' C' D'\text{为同一个椭圆的任意两个外切平行四边形}.
+\end{equation}
+
+\paragraph{引理3：}
+\quad
+\\椭圆的光学性质:由一个焦点发出的光经过椭圆形镜面反射后必过另一个焦点。（请结合反射定律自行思考其数学表述）
+
+
+
+
+\newpage
+\subsection{引力定律}
+接下来，由K-1出发，根据下图得到引力的一般规律。如图，$P$是椭圆轨迹上一点表示某时刻行星位置，焦点$S$表示太阳，$PR$于椭圆相切于$P$,连结$PS$,其长度即行星—太阳距离。
+
+作直径$DK \parallel PR$ 交$PS$于点 $E$，作$IH \parallel PR$ 交$PS$于点$I$,$Qx \parallel PR$。
+做$P$处法线$PF$交$DK$于点$F$;延长$PC$交椭圆于点$G$，则$DK$与$PG$为共轭直径。以下几问将频繁使用相似三角形。
+\\
+\textbf{（4.1）（5分）}由椭圆的第一定义与引理3，证明：$PE=CA$
+\\
+\textbf{（4.2）（5分）}由引理2(注意到$DK$、$PG$互为共轭直径)以及(4.1)中结论，证明：
+\begin{equation} \frac{ {Qx}}{ {QT} } = \frac{ {CD} }{ {CB}}
+\end{equation}
+\\
+\textbf{（4.3）（4分）}延长$Qx$交$PG$于点$v$(未画出),再由(4.1)中结论，证明:
+\begin{equation} \frac{ {Px} }{ {Pv} } = \frac{ {AC} }{ {PC} }
+\\
+\end{equation}
+\\
+\textbf{（4.4）（5分）}椭圆中也有类似相交弦定理的结论，我们可以直接使用下式：
+\begin{equation} \frac{ {Pv \cdot Gv} }{ {Qv}^2 } = \frac{ {PC}^2 }{ {DC}^2 }
+\\
+\end{equation}
+现将所有比例关系代入\textbf{引理1}，化简并取极限$t \to 0$,则有$Qv \to Qx$、$Gv \to 2 \cdot PC$等关系，请由此证明：引力f满足平方反比律(不必写出固定轨道上的不变量，例如$AC$)，即:
+\begin{equation} f \propto \frac{ 1 }{ {SP}^2 } 
+\end{equation}
+\textbf{（4.5）（5分）} 记太阳质量为$M$，行星质量$m$，试由N-2、N-3与K-3证明：$f \propto Mm $
+
+  %{ \color{blue} 此题已校对题号 }  
+\begin{figure}[h]
+    \centering
+     \includegraphics[scale=0.6]{图:行星运动/行星运动3.png}
+    \caption{椭圆轨道}
+    \label{椭圆轨道}
+\end{figure}
+
+
+
+
+
+\newpage
+
+\section{数据科学中的物理学——信息论（50分）}
+熵是描述系统混乱程度的一个物理量。1948年，克劳德·香农在他划时代的论文《A mathematical theory of communication》中，将熵的概念引入通信中的数据科学，用来描述信息的混乱程度，我们一般称之为信息的不确定度。这篇论文直接奠定了信息理论的基石，所以在两年后，这篇文章在出版成书时，它的名字直接被替换成了定冠词：《\textbf{The} mathematical theory of communication》。
+
+\textbf{第一部分：信息量与信息熵}
+
+在定义信息量之前，我们提两点要求：要求1：信息量应该是事件发生概率的减函数，因为若一个事件发生的概率越小，那么它一旦发生，带来的信息量会越大；要求2：如果两个事件相互独立，那么它们同时发生所带来的信息量，应该等于各自信息量之和，即信息量应该满足可加性。
+
+我们把信息的发出者称为信源。在接收信息之前，我们并不知道信源会发出什么信息，因此我们可以用一个随机变量 $X$ 来表示信源，$X$ 的每一个可能的取值就是信源可能发出的一个符号（或事件）。一个信源的“平均信息量”就叫做它的信息熵。换句话说，信息熵就是信源中所有可能事件带来的信息量的均值。记作 $H(X)$，其中 $X$ 表示这个信源对应的随机变量。
+
+\paragraph{(1.1)信息量（4分）}
+
+定义信息量是事件发生概率的函数，设事件为$x$，其发生概率为$p(x)$，则信息量为$I(x) = -\log_{2}p(x)$。请你验证：这一定义符合我们在题干中对信息量的要求1和要求2。
+
+\paragraph{(1.2)信息熵（6分）}
+
+请根据以上信息，写出 $H(X)$ 的表达式，并计算“抛一枚均匀硬币”的信息熵 $H(X_1)$ 。 如果这一枚硬币被人动了手脚，正面和反面的概率分别是0.75和0.25，计算此时抛这枚硬币的信息熵$H(X_2)$。
+
+% \textbf{(1.3)小例子}
+
+% 计算同时抛两枚质地均匀的硬币的信息熵$H(X_1)$。
+
+% 你的两枚硬币被人动了手脚。你同时抛掷两枚硬币的分布列：
+% \begin{table}[H]
+% \centering
+% \begin{tabular}{c|c|c|c|c}
+% \hline
+% 结果 & 00 & 01 & 10 & 11 \\
+% \hline
+% 概率 & 0.5 & 0.25 & 0.125 & 0.125 \\
+% \hline
+% \end{tabular}
+% \end{table}
+% 计算此时的信息熵$H(X_2)$。
+
+% \begin{equation}
+%     H(X) = \sum_{x_i \in X } -p(x_i) \log p(x_i)
+% \end{equation}
+
+\paragraph{(1.3)最大熵定理（10分）} 
+
+比较$H(X_1)$和$H(X_2)$的大小。你能否直观地解释为什么会出现这样的结果？试证明：对于给定样本空间大小为$n$的信源，等概率分布(均匀分布)具有最大的信息熵。
+
+\textbf{提示：}  
+当 $p_1,p_2,\dots,p_n$ 是一组非负实数并且满足 $\sum_{i=1}^n p_i = 1$ 时，利用对数函数的凸性，有不等式  
+\[
+\log \!\left(\sum_{i=1}^n p_i x_i\right) \;\geq\; \sum_{i=1}^n p_i \log x_i.
+\]  
+等号成立当且仅当 $x_1 = x_2 = \cdots = x_n$。
+
+\textbf{第二部分：洗牌不等式——信息论中的热力学第二定律}
+
+热力学第二定律告诉我们能量转化的方向性，它又可以表述为，随着时间的演化，一个系统的熵总是增加。我们来推导它在信息论中的一个简单的类比——洗牌不等式。在引出洗牌不等式之前，我们先引入条件熵和联合熵的概念。
+
+信息熵 $H(Y)$ 衡量的是随机变量 $Y$ 的不确定性。那么，如果我们事先已经知道与$Y$相关的另一个随机变量 $X$ 的取值，$Y$ 的不确定性会不会变小？为了度量“在已知 $X$ 的条件下，$Y$ 还剩下多少不确定性”，我们引入条件熵：
+
+\textbf{定义：条件熵 }我们把两个随机变量$X,Y$写成二维随机向量的形式$(X,\,Y)$，而$(x,\,y)$是二维随机变量$(X,\,Y)$的取值。设 $(X,Y)$ 的联合分布为 $p(x,y)$（意为$X=x$且$Y=y$的概率），条件概率分布为 $p(y\mid x)$（意为在$X=x$的条件下$Y=y$的条件概率）。则条件熵定义为
+\[
+H(Y\mid X)\;=\; \sum_{x\in X} p(x)\,H(Y\mid X=x)
+\;=\; -\sum_{x\in X}\sum_{y\in Y} p(x,y)\,\log_{2} p(y\mid x).
+\]
+
+联合熵可以理解为两个随机变量$X$和$Y$的总不确定度。
+
+\textbf{定义：联合熵 } 设 $(X,Y)$ 的联合分布为 $p(x,y)$，则联合熵定义为
+\[
+    H(X,\,Y) = -\sum_{x\in X}\sum_{y\in Y}p(x,\,y)\log_2p(x,\,y)
+\]
+
+现在我们来给出“洗牌不等式”。设随机变量 $X$ 表示一副扑克牌的随机的初始排序，随机置换 $T$ 表示一次随机的洗牌操作。$TX$是洗牌$T$作用于初始排列之后得到的新排列，在形式上我们可以将随机置换$T$也看做一个随机变量，将$TX$看作一个二维随机向量$(T,\,X)$。显然，$T$ 和 $X$ 应当是相互独立的。
+
+举一个简单的例子：你的牌组只有大小王两张牌，现在你手里的初始牌序$X$可能有两种情况：大王-小王、小王-大王，前一种情况对应$X=0$，后一种情况对应$X=1$，你的初始排序就是随机从0和1中取值。接下来你对这组初始牌序进行随机洗牌$T$，洗牌包含两种置换，牌序不变、两张牌交换，前者对应$T=0$，后者对应$T=1$，你的洗牌操作就是从上述两种置换中随机取值。当二维随机变量$(T,\,X)$取值为$(0,\,1)$时，$TX$代表你将手上的“大王-小王”洗成了“小王-大王”。对一副完整的随机牌序的扑克牌进行随机洗牌的数学过程和上述完全一样，只不过是$X$和$T$的取值范围大了些。
+
+在这种情况下，洗牌不等式表述为：
+\[
+    H(TX) \;\geq\; H(X)
+\]
+
+$H(TX)$在这里的含义应当是$T$和$X$的联合熵$H(T,\,X)$。洗牌不等式说明：在与当前排序独立的随机洗牌下，洗牌后的牌序的信息熵不会减少。本题我们来证明这个不等式。
+
+\paragraph{(2.1)条件熵：在先验信息下的“不确定性”（7分）}
+
+% 根据以上的定义，试证明：若$X$和$T$是两个任意随机变量，则不等式$H(TX) \geq H(TX\mid T) $成立。
+试证明条件熵的定义中的第二个等号成立。
+
+\paragraph{(2.2)联合熵的分解（7分）}
+
+条件熵是我们在已知一个随机变量的信息的条件下，另一个随机变量剩余的不确定性，那么我们猜想有等式$H(T,\,X) - H(T) = H(X\mid T)$。请你证明这一等式。
+
+\paragraph{(2.3)事情更确定了吗（6分）}
+
+试比较$H(X\mid T)$和$H(X)$的大小。
+
+\paragraph{(2.4)洗牌不等式（10分）}
+
+根据（2.2）和（2.3）的结果，尝试证明洗牌不等式，并尝试论述它可以如何与热力学第二定律进行类比。
+
+
+
+
+
+\newpage
+
+
+
+
+
+
+\newpage
+\large
+\textbf{以下三道题目(H,I,J)中选一道完成;若多选，且所选的第二题得分超过40分，则所选第二题与第一题得分一同计入本卷得分}
+\normalsize
+ % int
+	\section{不可爱猫猫生成器（80分）}
+		\subsection*{必要的公式}
+        \begin{enumerate}
+           \item 连续分布的期望计算：设$X$为一随机变量。概率密度函数为$p(x)$，则其期望$\mathbb{E}[X] = \int p(X)X\rmd X$
+           \item 随机变量的期望和方差的关系：$\mathbb{D}[X] =\mathbb{E}[X^2] -\mathbb{E}[X] ^2 $
+           \item 两随机变量独立时方差的叠加法则：$\mathbb{D}[aX_1+bX_2] =a^2\mathbb{D}[X_1]+b^2\mathbb{D}[X_2]$
+           \item 正态分布的概率密度函数：若$X \sim \mathcal{N}(\mu, \sigma^2)$，则其概率密度函数$p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right) $
+        \end{enumerate}
+		
+		\subsection{布朗运动}
+		
+		在讲这个故事之前，我们介绍一下背景：布朗运动是由美国植物学家罗伯特·布朗观察到的一种无规则运动，微粒（如水面上的花粉）在每一段微小的时间内会\textbf{等概率地向各个方向位移，且位移大小与方向无关}，这些位移不会相互影响，因此，根据方差的叠加法则，我们可以对一段时间内的方差求和。当方差不随时间变化时，我们用\textbf{扩散强度}$c$来表示单位时间的扩散标准差。(为了方便计算与略去线性代数的表述，本题只考虑一个方向上的扩散过程）\\
+		由于这里时间可以被无穷分割，在一段微小时间$\rmd t$ 内，微粒的一次运动$\rmd\epsilon = \tilde \epsilon(\rmd t)$内部同样包含着无数次的更微小运动，这些运动相加，就会近似于一个\textbf{正态分布}$\mathcal{N}(\mu,\sigma^2)$。于是，我们可以这样表示某时间内发生的随机位移：
+		
+		
+		\noindent \textbf{(1.1)（2分）：}证明$\tilde  \epsilon(t)$的期望与方差满足：\(\mathbb{E}[\tilde  \epsilon(t)] = 0,\quad \mathbb{D}[\tilde  \epsilon(t)] = c^2 t\)，并写出$\tilde  \epsilon(t)$满足的分布。 
+		
+	
+		如果这个微粒受到外力的作用，受力平衡后就会向某个方向以速度\(\mu\)发生漂移，这个过程同样与布朗运动没有关联，因此我们以\(X(t)\)表示粒子的位置，漂移的效果将与粒子原本扩散强度为$c$的布朗运动叠加，从而导致粒子在微小时间$\rmd t$内的位置变化量不等于$\rmd \epsilon$。此时，介观粒子在无穷小时间$\rmd t$的微小位移为：
+		\begin{equation*}
+			\rmd X(t) = \mu  \rmd t  +  \rmd  \epsilon 
+		\end{equation*}
+		
+		\noindent \textbf{(1.2)（4分）}：计算$X(t)$的期望与方差。
+		
+		\noindent \textbf{(1.3)（4分）}：若两个粒子漂移速度分别为$\mu_1,\mu_2$，扩散强度分别为$c_1,c_2$，试求出两个粒子的相对位置$X_1(t)-X_2(t)$的分布。	
+		
+		\subsection{郎之万方程}
+		我们的主人公开始转头思考随机游走的成因。上文中对粒子布朗运动的统计描述可以通过力学定律推导得出。设一个介观粒子在$t$时刻的位置为$x(t)$，根据牛顿第二定律，粒子的动力学方程为：
+		\[m\frac{\rmd^2 x}{\rmd t^2} = F(t)-\alpha \frac{\rmd x}{\rmd t}\]
+		
+		其中，$F(t)$是只与时间有关的随机力，由于与方向无关，它的作用叠加后会相互抵消。此外，不同时刻的$F(t)$互相独立。\(\alpha \dfrac{\rmd x}{\rmd t}\)为粒子在介质中运动受到的阻力。
+		
+		
+		\noindent \textbf{(2.1)（4分）}为了进行下一步的探究，将该方程变形，使得方程中除了$F(t)$外只出现\(\dfrac{\rmd x^2 }{\rmd t} , \dfrac{\rmd^2 x^2}{\rmd t^2}, \dfrac{\rmd x}{\rmd t}\)项。
+		
+		接下来，我们将这个方程对时间取平均值（提示：求导与取平均运算是可以交换的\(\overline{\dfrac{\rmd}{\rmd t}f} = \dfrac{\rmd}{\rmd t}\bar f \)；在统计力学中，能均分定理给出：\(\overline{\dfrac{1}{2} mv^2 }= \dfrac{1}{2} kT\)，$k$为玻尔兹曼常数。）
+		
+		\noindent \textbf{(2.2)（3分）}方程两侧对时间取平均值后，可以化简成一个关于\(\overline{x^2}\)的微分方程。写出这个微分方程。
+		
+		\noindent \textbf{(2.3)（6分）}做布朗运动的介观粒子的质量相对较小，故(2.2)中含有$m$的项常常被忽略（这被称为\textbf{过阻尼条件}）。由于介观粒子$t$时刻感受到的随机力$F(t)$来自于大量粒子的撞击，根据中心极限定理，$F(t)$应服从\textbf{正态分布}。在这样的情况下，可以从郎之万方程出发证明$x(t)$服从方差随时间线性增长的正态分布，也就是说介观粒子确实做布朗运动。请直接写出这种情况下介观粒子布朗运动的扩散强度$c$，并分析影响扩散强度的主要因素。
+		
+		% 请据此根据郎之万方程，写出布朗运动的\(d\epsilon\)的表达式，并分析影响扩散速率的主要因素。
+		\begin{figure}[htbp]
+            \centering % 图片居中
+            \includegraphics[width=0.4\textwidth]{diffusion.jpg}
+            \caption{扩散过程示意图} 
+            \label{扩散过程示意图} 
+        \end{figure}
+		
+		\subsection{别闹了，基米先生}
+		你是一只不可爱的猫猫，在主人公做布朗运动实验（不受外力）的时候，你在粒子原点正上方一直观察着它。不知情的你用自己的体温肆意地干扰着实验过程。由于你的干扰，现在，以$W(t)$表示扩散强度$c=1$的布朗运动，其在$\rmd t$时间内的微小位移记为$\rmd W_t$，粒子在无穷小时间$\rmd t$内的位移为\(\rmd X(t) = \sigma(t)  \rmd W_t \)（扩散强度会随着时间而变化）。
+		
+		\noindent \textbf{(3.1)（5分）}请你计算$X(t)$的分布。（提示：若多个独立随机变量均服从正态分布，则它们的和也服从正态分布,其均值与方差为它们和的均值与方差。）
+		
+		随着时间流逝，粒子距离原点的位置会越来越远。本着当最佳观众的想法，你不自觉地将头向上移动，这样你就可以一直看到粒子的运动过程。因此，在你的视角里,粒子的位置会满足：
+		\[X(t+\rmd t) = (1-\Lambda(t) \rmd t)X(t) + \sigma(t)  \rmd W_t\]，其中\(\Lambda(t)\)为你的抬头产生的视野变化速率。
+		
+		\noindent \textbf{(3.2)（7分）}如果你希望保持偏移的平均的距离大小不变（为了方便讨论，我们将这一条件量化为：若$\mathbb{D}[X(t_0)]=1$，则$\mathbb{D}[X(t)]=1$对$t \ge t_0$恒成立），那么你的视野变化速率，即
+		\(\Lambda(t)\)应当满足什么样的条件？
+		
+		\noindent \textbf{(3.3)猫猫其实什么都知道 （10分）} 设粒子的初始分布在\(X(0) \sim \mathcal{N}(x_0,1)\)，假设猫猫知道所有时间的\(\sigma(t)\)，根据$\sigma(t)$和(3.2)中求出的$\Lambda(t)$ ，求出\(X(t)\)的分布。
+        可能用到的小量近似：$\ln (1+adx) \approx adx $
+		
+		\subsection{Diffusion model}
+
+
+实验失败的主人公愤怒地转码了。然而，他的第一个任务是：用Diffusion 模型生成猫猫的图像。\\
+Diffusion模型包括“前向过程”和“反向过程”两个步骤：在“前向过程”中，一张图像被逐步添加噪声，直到图像几乎变成（容易利用计算机采样的）高斯噪声；在“反向过程”中，首先采样高斯噪声，而后从中逐步去噪，最终还原出一张清晰的图像。
+
+为简便起见，本题中我们只讨论离散时间的Diffusion模型——DDPM，并且我们只实现一个标量随机变量的生成。（真实的图片应当以矢量表示）该模型的前向过程和反向过程各有$T$个时间步。该模型的前向过程为：
+\[x_{t+1} = \omega_t x_t + \sigma_t   z_t  ,\quad t =0,1,2,\cdots,T\]
+
+% 此时满足的关系式为：\(\omega_t ^2=1-\sigma_t^4 \)\\
+其中$\sigma_t$被称为噪声调度策略，均为已知量。$\omega_t$为未知量，$z_t$为随机变量，服从标准正态分布$\mathcal{N}(0,1)$。
+
+% \textbf{(4.1)（6分）}将第三部分的结论（1.\(\omega_t\)与\(\sigma_t\)的关系，2.\(x_t\)与\(x_0\)的关系）转到离散问题中(注意不要盲目类比）\\
+\noindent \textbf{(4.1)（6分）}首先我们试图推广本题第三部分的结论。(3.2)中我们求出的$\Lambda(t)$起到了\textbf{方差保持}的效果：也就是说，（3.2）和（3.3）中的$X(t)$的方差到达$1$后就不再变化。为了经过$T$步前向过程后，随机变量$x_T$的分布几乎达到（计算机中容易采样的）标准正态分布，我们希望前向过程也有类似的方差保持性质：若$\mathbb{D}[x_{0}] =1$，则$\mathbb{D}[x_{t}] =1$对$t \ge 0$恒成立。据此推导$\omega_t$与$\beta_t$的关系，并直接写出$x_t$与$x_0$的关系。在本小问和以下小问中，你可使用$\bar a_t = \prod_{i=1}^{t}(1-\sigma_i)$来简化你的表达式。
+
+经过前向过程后，随机变量$x_T$的分布已经几乎成为标准正态分布，现在我们考虑如何通过反向过程从标准正态分布出发恢复其初始分布，即$x_0$的分布。\\
+\noindent \textbf{(4.2) 反向贝叶斯（5分）} 在(4.1)中，你已导出$x_t$与$x_0$的关系，也就是说我们可以写出条件概率$P(x_t|x_0)$；前向过程给出了$x_t$与$x_{t-1}$的关系，也就是说我们可以写出条件概率$P(x_t|x_{t-1},x_0) = P(x_t|x_{t-1})$（注意：这里在条件中引入前向过程中不存在的$x_0$只是为了后续利用贝叶斯公式推导时的便利） 现在利用贝叶斯公式证明：\(P(x_{t-1}|x_t,x_0) = P(x_t | x_{t-1},x_0)\dfrac{P(x_{t-1}|x_0)}{P(x_{t}|x_0)}\)。\\
+\noindent \textbf{(4.3)（6分）} 显然，$P(x_{t-1}|x_t,x_0)$是一个正态分布，对比正态分布的概率表达式，直接写出它的均值和标准差\(\tilde\mu_{t-1} , \tilde\sigma_{t-1}\)，正态分布的概率参见开头。\\
+% 这里你可以用以下符号简化:$\bar a_t = \prod_{i=1}^{t}(1-\sigma_t^2) $
+\noindent \textbf{(4.4)（10分）}利用\(x_0\)与\(x_t\)的关系，写出\(\tilde \mu_{t-1}\)的表达式，表达式中应当不含$x_0$，只含有$x_t$和前向过程的第$t$步中添加的噪声$z_t$，并解释\(z_t\)前的符号为负的原因。\\
+\textbf{(4.5)（8分）}DDPM的反向过程中通常用Unet神经网络预测噪声，也就是说前向过程的每一步中添加的噪声$z_t$可视为已知。试根据先前得到的结论，给出计算\(x_{t-1}\)的方法，简要写出DDPM的图片生成流程（从正态分布噪声$x_T$还原出初始分布$x_0$的算法），并且说明该方法为什么能够有效生成猫猫图像。
+
+
+    
+		
+		
+\newpage
+
+
+\section{电子的涟漪(80分)}
+\subsection{数学基础}
+定义$\nabla$算子为(直角坐标系):
+\[\nabla = \hat{\mathbf{x}}\frac{\partial}{\partial x} + \hat{\mathbf{y}}\frac{\partial}{\partial y} + \hat{\mathbf{z}}\frac{\partial}{\partial z}\]
+其中$\hat{\mathbf{x}},\hat{\mathbf{y}},\hat{\mathbf{z}}$分别为$x,y,z$方向的单位矢量。
+若$\phi$为标量函数，$\mathbf{A}$为矢量函数(我们用加粗体代表一个矢量)，则有：
+\[\nabla \phi = \hat{\mathbf{x}}\frac{\partial \phi}{\partial x} + \hat{\mathbf{y}}\frac{\partial \phi}{\partial y} + \hat{\mathbf{z}}\frac{\partial \phi}{\partial z}\]
+\[\nabla \cdot \mathbf{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z}\]
+\[\nabla \times \mathbf{A} = \left(\frac{\partial A_z}{\partial y} - \frac{\partial A_y}{\partial z}\right)\hat{\mathbf{x}} + \left(\frac{\partial A_x}{\partial z} - \frac{\partial A_z}{\partial x}\right)\hat{\mathbf{y}} + \left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right)\hat{\mathbf{z}}\]
+  \textbf{(1.1)(3分)} 证明$\nabla \times (\nabla \phi) = 0$。\\
+  \textbf{(1.2)(3分)} 证明$\nabla \cdot (\nabla \times \mathbf{A}) = 0$。\\
+  \textbf{(1.3)(4分)} 证明$\nabla \times (\nabla \times \mathbf{A}) = \nabla(\nabla \cdot \mathbf{A}) - \nabla^2 \mathbf{A}$，其中$\nabla^2 = \nabla \cdot \nabla$。\\
+
+散度定理：
+\[\oint_S \mathbf{A}\cdot \mathrm{d}\mathbf{S} = \int_V (\nabla \cdot \mathbf{A})\mathrm{d}V\]
+其中$S$为闭合曲面，$V$为闭合曲面$S$所围成的体积，$\mathbf{A}$为任意矢量函数。$\nabla \cdot \mathbf{A}$称为$\mathbf{A}$的散度。
+
+旋度定理：
+\[\oint_C \mathbf{A}\cdot \mathrm{d}\mathbf{l} = \int_S (\nabla \times \mathbf{A})\cdot \mathrm{d}\mathbf{S}\]
+其中$C$为闭合曲线，$S$为闭合曲线$C$所围成的曲面，$\mathbf{A}$为任意矢量函数。$\nabla \times \mathbf{A}$称为$\mathbf{A}$的旋度。
+
+定义一维狄拉克$\delta$函数为：
+\[\delta(x) = \begin{cases} +\infty, & x=0 \\ 0, & x \neq 0 \end{cases}\]
+且满足
+\[\int_{-\infty}^{+\infty} \delta(x) \mathrm{d}x = 1\]
+\[\int_{-\infty}^{+\infty} f(x) \delta(x-a) \mathrm{d}x = f(a)\]\\
+  \textbf{(1.4)(3分)} 证明$\delta(ax) = \frac{1}{|a|}\delta(x)$。\\
+  \textbf{(1.5)(6分)} 证明$\delta(g(x)) = \sum_i \frac{1}{|g'(x_i)|}\delta(x-x_i)$，其中$x_i$为$g(x)=0$的所有简单根，即在$x_i$处$g'(x_i) \neq 0$。\\
+
+三维狄拉克$\delta$函数可以表示为$\delta(\mathbf{r}) = \delta(x)\delta(y)\delta(z)$，其中$\mathbf{r} = x\hat{\mathbf{x}} + y\hat{\mathbf{y}} + z\hat{\mathbf{z}}$。
+\subsection{麦克斯韦方程组}
+在高中，我们学过点电荷的电场分布为
+\[
+  \mathbf{E} = \frac{1}{4\pi \varepsilon_0}\frac{q}{r^2}\hat{\mathbf{r}}
+\]
+其中$\varepsilon_0$为常量，$q$为点电荷的电量，$r$为点电荷到场点的距离，$\hat{\mathbf{r}}$为从点电荷指向场点的单位矢量。\\
+  \textbf{(2.1)(5分)} 计算点电荷在空间中半径为$R$的球面上的电通量，注意考虑点电荷在球面内和球面外两种情况(从电场线的方面考虑)。\\
+  \textbf{(2.2)(4分)} 证明一个点电荷对一个闭合曲面的电通量只与该点电荷是否在闭合曲面内有关，而与闭合曲面的形状和大小无关。\\
+  \textbf{(2.3)(3分)} 设空间中有多个点电荷，证明这些点电荷对一个闭合曲面的电通量只与在闭合曲面内的点电荷总量有关，而与闭合曲面的形状和大小无关。\\
+
+我们可以将上述有关点电荷的结论利用叠加原理推广到任意电荷分布，于是可以得到高斯定律：
+\[\oint_S \mathbf{E}\cdot \mathrm{d}\mathbf{S} = \frac{Q}{\varepsilon_0}\]
+其中$Q$为闭合曲面$S$内的总电荷量。\\
+\textbf{(2.4)(3分)} 推导高斯定律的微分形式，即计算$\mathbf{E}$的散度。(注意到$Q$可以写成一个体积分的形式)。\\
+
+现在考虑$\mathbf{E}$的旋度，已知法拉第电磁感应定律为
+\[ \mathcal{E} = -\frac{\mathrm{d}\Phi_B}{\mathrm{d}t}\]
+其中$\Phi_B$为穿过闭合曲线所围成的曲面$S$的磁通量，$\mathcal{E}$为闭合曲线$C$上的电动势。注意到
+\[\mathcal{E} = \oint_C \mathbf{E}\cdot \mathrm{d}\mathbf{l},\quad \Phi_B = \int_S \mathbf{B}\cdot \mathrm{d}\mathbf{S}\]
+  \textbf{(2.5)(3分)} 利用旋度定理，推导法拉第定律的微分形式，即计算$\mathbf{E}$的旋度。\\
+
+对于磁场$\mathbf{B}$，我们有
+\[\nabla \cdot \mathbf{B} = 0\]
+\[\nabla \times \mathbf{B} = \mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}\]
+其中$\mathbf{J}$为电流密度，$\mu_0$为常量。
+
+\subsection{势与场}
+现在，我们已经有了$\mathbf{E}$和$\mathbf{B}$的散度和旋度，接下来我们尝试将$\mathbf{E}$和$\mathbf{B}$表示成某些势的函数。\\
+  \textbf{(3.1)(3分)} 证明$\mathbf{B}$可以写成一个矢量$\mathbf{A}$的旋度。\\
+  \textbf{(3.2)(4分)} 证明$\mathbf{E}$可以写成一个标量$\phi$和矢量$\mathbf{A}$的函数。\\
+  \textbf{(3.3)(8分)} 证明$\phi$和$\mathbf{A}$满足以下方程： \[\nabla^2 \phi + \frac{\partial}{\partial t}(\nabla \cdot \mathbf{A}) = -\frac{\rho}{\varepsilon_0}\]
+  \[\nabla^2 \mathbf{A} - \mu_0 \varepsilon_0 \frac{\partial^2 \mathbf{A}}{\partial t^2} - \nabla\left(\nabla \cdot \mathbf{A} + \mu_0 \varepsilon_0 \frac{\partial \phi}{\partial t}\right) = -\mu_0 \mathbf{J}\]
+  其中$\rho$为电荷密度，$\mathbf{J}$为电流密度。\\
+
+引入洛伦兹规范
+\[\nabla \cdot \mathbf{A} + \mu_0 \varepsilon_0 \frac{\partial \phi}{\partial t} = 0\]
+与达朗贝尔算子
+\[\Box^2 = \nabla^2-\mu_0\varepsilon_0\frac{\partial^2}{\partial t^2} \]
+  \textbf{(3.4)(6分)} 证明在洛伦兹规范下，$\phi$和$\mathbf{A}$满足以下方程：
+  \[\Box^2 \phi = -\frac{\rho}{\varepsilon_0}\]
+  \[\Box^2 \mathbf{A} = -\mu_0 \mathbf{J}\]
+推迟势为上述方程的解：
+  \[\phi(\mathbf{r},t) = \frac{1}{4\pi \varepsilon_0} \int \frac{\rho(\mathbf{r}',t_r)}{|\mathbf{r}-\mathbf{r}'|} \mathrm{d}V'\]
+  \[\mathbf{A}(\mathbf{r},t) = \frac{\mu_0}{4\pi} \int \frac{\mathbf{J}(\mathbf{r}',t_r)}{|\mathbf{r}-\mathbf{r}'|} \mathrm{d}V'\]
+  其中$t_r = t - \frac{|\mathbf{r}-\mathbf{r}'|}{c}$为推迟时间，$c = \frac{1}{\sqrt{\mu_0 \varepsilon_0}}$为光速,$\mathrm{d}V'$为源点体积元,$\mathbf{r}'$为源点位置矢量,$\mathbf{r}$为场点位置矢量。
+
+\subsection{李纳-维谢尔势}
+一个点电荷在真空中以速度$\mathbf{v}(t)$运动，其运动轨迹为$\mathbf{w}(t)$。则电荷密度和电流密度分别为
+\[\rho(\mathbf{r}',t) = q \delta(\mathbf{r}'-\mathbf{w}(t))\]
+\[\mathbf{J}(\mathbf{r}',t) = q \mathbf{v}(t) \delta(\mathbf{r}'-\mathbf{w}(t))\]
+  \textbf{(4.1)(4分)} 写出点电荷的推迟势，用积分式表示。
+
+由于推迟时间$t_r$隐含在积分中，直接计算上述积分较为困难。我们可以通过引入一个新的变量$t'$来简化计算。定义
+\[f(t') = t' + \frac{|\mathbf{r}-\mathbf{w}(t')|}{c}\]
+则$t_r$为$f(t')=t$的解。注意到
+\[\frac{\mathrm{d}f}{\mathrm{d}t'} = 1 - \frac{\mathbf{v}(t') \cdot (\mathbf{r}-\mathbf{w}(t'))}{c|\mathbf{r}-\mathbf{w}(t')|}\]
+  \textbf{(4.2)(8分)} 证明
+  \[\delta(f(t')-t) = \frac{\delta(t'-t_r)}{\left|1 - \frac{\mathbf{v}(t') \cdot (\mathbf{r}-\mathbf{w}(t'))}{c|\mathbf{r}-\mathbf{w}(t')|}\right|}\]\\
+  \textbf{(4.3)(10分)} 利用上述结果，计算点电荷的推迟势，得到李纳-维谢尔势：
+  \[\phi(\mathbf{r},t) = \frac{1}{4\pi \varepsilon_0} \frac{q}{(1-\frac{\mathbf{v}(t_r) \cdot (\mathbf{r}-\mathbf{w}(t_r))}{c|\mathbf{r}-\mathbf{w}(t_r)|})|\mathbf{r}-\mathbf{w}(t_r)|}\]
+  \[\mathbf{A}(\mathbf{r},t) = \frac{\mu_0}{4\pi} \frac{q \mathbf{v}(t_r)}{(1-\frac{\mathbf{v}(t_r) \cdot (\mathbf{r}-\mathbf{w}(t_r))}{c|\mathbf{r}-\mathbf{w}(t_r)|})|\mathbf{r}-\mathbf{w}(t_r)|}\]
+
+\newpage 
+
+
+%这里是相对论题目的开头处
+
+
+\section{时空的对称性(80分)}
+\subsection{相对性原理：对一切惯性参考系，力学定律相同(14分)}
+\subsubsection{绝对时空观} 惯性系S’相对于S有恒定的速度$ \vec{v}=v \vec{e}_x $，且共用一个“时间”，即$t'=t$;\\
+\textbf{(1.1)(2分)}试给出S中坐标$\{ x,y,z \}$与$S‘$中坐标$\{ x',y',z' \}$的关系，并验证牛顿第二定律在该变换下符合相对性原理。
+\subsubsection{光速不变与新时空观}
+\paragraph{} \textbf{Henceforth, space by itself, and time by itself, are doomed to fade away into mere shadows, and only a kind of union of the two will preserve an independent reality.}
+\begin{flushright}
+ ----Hermann Minkowski   
+\end{flushright}
+迈克尔逊莫雷实验否定了以太理论，间接支持了光速不变原理。这一原理的加入，揭示了“时间空间整体密不可分”的特点。
+现仅考虑一维空间，两惯性系时空坐标S $:\{ t,x\}$与S'$ :\{ t',x'\}$，仍然取惯性系S’相对于S有恒定的速度$ \vec{v}=v \vec{e}_x $ ,且两系的（0，0）与（0，0）是同一个时空点（或事件）。\\
+\textbf{(1.2)(2分)}若要满足相对性原理，S系中匀速直线运动的质点，在S'系中也应做匀速直线运动，试由这一表述说明惯性系间的时空坐标变换满足如下形式：
+
+\begin{equation}
+\left\{
+\begin{aligned}
+& ct'=\Lambda_{00}ct +\Lambda_{01}x \\
+& x' = \Lambda_{10}ct+ \Lambda_{11}x 
+\end{aligned}
+\right.
+\end{equation}
+\textbf{(1.3)(10分)}考虑光速不变原理，考察（0，0）出发正向传播的光在两参考系间的变换；再考虑在某系中观察另一系原点的运动。由这两点结合相对性原理，推导出洛伦兹变换：
+\begin{equation}
+\left\{
+\begin{aligned}
+& ct'=\gamma( ct -\frac{v}{c} \cdot x ) \\
+& x' = \gamma( x - \frac{v}{c} \cdot ct )  
+\end{aligned}
+\right. \quad \quad ,where \ \ \gamma=\frac{1}{\sqrt{1-v^2/c^2}} 
+\end{equation}
+\subsection{闵可夫斯基时空(10分)}
+\paragraph{}此后我们使用几何单位制，\textbf{即设定单位使得光速与引力常数为1：$c=G=1$ }
+
+\subsubsection{时空的几何结构}
+\paragraph{欧几里得平面:}圆方程$x^2+y^2=R^2$在转动变换$\left\{
+\begin{aligned}
+& x'=x \cos{\varphi} - y \sin{\varphi} \\
+& y' = x \sin{\varphi} + y \cos{\varphi} 
+\end{aligned}
+\right. $下方程的形式保持不变——其几何意义是圆作为图形具有\textbf{旋转对称性}。\\
+\textbf{(2.1)(4分)}仿照以上变换，将洛伦兹变换代入方程$ t^2-x^2 ={\tau}^2$，验证其不变。
+\\ \quad
+\subsubsection{坐标系与度量}
+\paragraph{}圆可以用“距离”来定义:"到固定点的距离为定值的点集称为圆",这给出了圆方程。而相对论时空中的方程则暗示着我们，相对论时空有着自己的类似于“两点距离”的一种"度量",(2.1)中的方程也是在描述到时空远点的"距离"不变的点集。类比欧几里得平面线元$\rmd s^2=\rm dx^2 + \rmd y^2$，我们定义1+1维相对论时空的间隔"$\rmd s^2=-\rmd t^2 +\rmd x^2$，并且将满足这一线元形式的二维时空称为闵可夫斯基时空。线元本身是不随坐标变换而改变的（试想象线段不会因为摆放角度不同而改变实际的长度）。由于(2.1)问中的闵可夫斯基时空线元的形式有相似的结构，我们在上文中找到的保持方程不变的变换，显然也能保持线元的形式不变，我们接下来详细讨论这种不变性。
+
+\paragraph{}为了统一表述更复杂情况下（不简单的空间几何或奇怪坐标系中）的线元，我们定义度规分量：
+\paragraph{定义1:度规分量$g_{\mu\nu}$,满足：}
+\quad
+\begin{equation}
+ \rmd s^2=\sum_{\mu,\nu}{} g_{\mu\nu} {\rmd x}_\mu{\rmd x}_\nu 
+\end{equation}
+\\其中的希腊字母角标区分各个坐标，对应坐标声明中的顺序$\{t,x,y,z \}$,规定$x_0=t$、$x_2=y$等等。
+\\例如：极坐标下，二维平面：$\rmd s^2 =\rmd x^2+\rmd y^2=\rmd r^2 + r^2 \rmd \theta^2$,取$x'_1=r,x'_2=\theta$,则$g_{11}=g_{22}=1,g_{12}=0$,而$g'_{11}=1,g'_{22}=r^2,g'_{12}=0$\\
+\textbf{(2.2)(6分)}更一般地,请由全微分公式$\rmd x'_\sigma=\sum_{\mu} \dfrac{\partial x'_\sigma}{\partial x_\mu } \rmd x_\mu $，代入$ds^2$，给出坐标变换$ \{x_\mu\} \to \{ x'_\mu\}$ 后度规分量$g'_{\sigma \rho }(x')$ 与 $g_{\mu \nu }(x)$的关系。\\注：$x'$或$x$是四个坐标的简写，括号仅代表它们是旧或新坐标的函数，实际在n维空间中它们是n元函数。
+\\ \quad
+\subsection{对称性与$K$矢量场(10分)}
+我们发现，若度规分量$g_{\mu\nu}$有不显含的坐标，则\textbf{时空本身}具有某种坐标的平移不变的性质。
+
+\textbf{例1} \quad 以上极坐标下的欧式度规$g'_{11} ,g'_{22}$不含$\theta$ 但是含$r$,
+取变换$r'=r,\theta'=\theta +\varphi$其中$\varphi $是小量，则$g''_{\mu\nu}$形式不变 仍为$g'_{11}=1,g'_{22}=r'^2$，它的几何意义是欧式平面这一空间具有\textbf{旋转对称性}。
+\textbf{例2} \quad
+取变换$r'=r+a,\theta'=\theta$其中$a $是小量，则$g''_{\mu\nu}$形式改变为$g''_{11}=1,g''_{22}=(r'-a)^2$，显然欧式平面并没有这种对称性
+
+\paragraph{定义2：无穷小变换对应的矢量场，$\xi_{\mu}(x)$,满足：}
+\quad
+\begin{equation}
+ x'_\mu =x_\mu +\varepsilon \xi_\mu(x),\quad   \varepsilon \to0
+\end{equation}
+\\于是可以说\textbf{例1、例2}中的无穷小变换对应矢量场$(0,1)$与$(1,0)$,小量$\varphi$、$a$对应该定义中的 $\varepsilon$ 
+\paragraph{定义3：K矢量场}我们将不改变度规分量形式的变换对应的矢量称为$K$矢量，它体现了时空的对称性。
+\paragraph{例3} 对于平面而言，其有K矢量场在极坐标系下表示为$(0,1)$。如果在直角坐标系$\{x,y \}$ 下表示这一矢量场为$ (-y,x) $（你不用思考其中原因与变换方法）。对于我们不熟悉的某时空（或空间），从“度规分量是否显含某坐标”这一点不能让我们直接得到该时空的全部对称性信息，我们需要一个普适的$K$矢量方程。
+\\ \quad
+\\
+\textbf{(3.1)(10分)}试结合\textbf{定义2}与\textbf{小问（2.2）}中的结论，在准确到小量$\varepsilon$的一阶项的情况下，给出$K$矢量应当满足的方程。
+\\你可能会用到以下记号：
+\begin{equation}
+\frac{\partial x_\mu}{\partial x_\nu}=\delta_{\mu\nu}= \begin{cases} 1,\quad if \quad  \mu = \nu  \\0,  \quad if \quad \mu \neq\nu \end{cases}
+\end{equation}
+
+ 以及一阶展开式：
+\begin{equation}
+g_{\mu\nu}(x+\varepsilon\xi)=g_{\mu\nu}(x)+
+ \sum_\sigma \frac{\partial g_{\mu\nu}(x)}{\partial x_\sigma}\varepsilon \xi_\sigma+O(\varepsilon^2)
+\end{equation}
+\\ \quad
+\subsection{惯性运动与守恒量(24分)}
+\paragraph{定义4：}
+\begin{equation}
+\text{质点的四速度：} U_\mu = \frac{\rmd x_\mu}{\rmd \tau},
+\\ \text{光子的四速度：}  U_\mu=\frac{\rmd x_\mu}{\rmd \beta}
+\end{equation}
+其中，$\beta$是光子运动轨迹的特定参数，此处使用是为了避免$\tau=0$导致的不良定义。
+\\ \textbf{(4.1)(4分)}在闵可夫斯基时空$\rmd s^2=-\rmd \tau^2=-\rmd t^2+\rmd x^2+\rmd y^2+\rmd z^2$中，证明以下\textbf{定理1:对于一般质点$\sum_{\mu,\nu}g_{\mu\nu}U_\mu U_\nu=-1$,对于光子$\sum_{\mu,\nu}g_{\mu\nu}U_\mu U_\nu=0$ }\\
+\textbf{(4.2)(4分)}取坐标$\{t,x,y,z\}$,说明对于在明可夫斯基时空一般质点:
+\begin{equation}
+    U_0=\gamma\quad, U_i=\gamma v_i,i=1,2,3\quad ,where \quad v_i=\frac{\rmd x_i}{\rmd t},\gamma=\frac{1}{\sqrt{1-\vec{v}^2}}
+\end{equation}\\
+\textbf{(4.3)(10分)}惯性运动意味着不受外力，在惯性系中看到的加速度为$0$。在惯性系（$ \dfrac{\partial g_{\mu\nu}}{\partial x_\sigma} =0 $）中，“加速度为0”可以表示为$\dfrac{\rmd U_\mu}{\rmd \tau}=0$，请证明\textbf{定理2：若$\xi$是$K$矢量，$\sum_{\mu,\nu}g_{\mu\nu}U_\mu \xi_\nu$是质点运动的守恒量（不随固有时$\tau$或光线的特定参数$\beta$改变）}\\
+\textbf{(4.4)(6分)}试由定理2解释以往我们熟知的结论：为什么对于1+1维时空$\rmd s^2=-\rmd t^2+ \rmd x^2$，中惯性运动的一般质点$U=(\gamma,\gamma v)$而言，$v$是一个守恒量。(你可能需要使用全微分公式$\dfrac{\mathrm{d}}{\mathrm{d}\tau}=\dfrac{\mathrm{d} x_\sigma}{\mathrm{d}\tau}\dfrac{\partial}{\partial x_\sigma}$)
+
+
+\subsection{史瓦西时空(10分)}
+\paragraph{}与牛顿力学不同，广义相对论将引力看作时空的几何效应。
+例如球形天体的质量会弯曲时空，使得线元变为
+\begin{equation}
+    \rmd s^2=-A(r)\rmd t^2+\frac{1}{A(r)} \rmd r^2+r^2(\rmd \theta^2+\sin^2{\theta}\rmd \varphi^2)
+\end{equation}
+\paragraph{}
+牛顿引力论中质点（包括光子）的运动方程由第二定律和万有引力定律给出：$a_i=-\dfrac{\partial \phi(x)}{\partial x_i}$
+\\相对论中"几何效应"给出的运动方程为$a_i=\dfrac{1}{2}\dfrac{\partial g_{00}(x)}{\partial x_i}$，$a_i，i=1,2,3$是牛顿力学中的加速度分量。\\
+\textbf{(5.1)(4分)}回忆引力的形式，给出牛顿引力论中质量$M$的球形天体产生的引力势$\phi(r)$;并对比两理论的运动方程得出$A(r)$的形式。\\
+\textbf{(5.2)(6分)}只考虑$\theta=\pi/2$的情况，记质点四速度为$U=(\dfrac{\rmd t}{\rmd \beta},\dfrac{\rmd r}{\rmd \beta},0,\dfrac{\rmd \varphi}{\rmd \beta})$,通过观察寻找$K$矢量，找出两个守恒量分别记为“$E$、$L$”，已知\text{定理2}在弯曲时空中仍然成立。
+
+
+\subsection{星光偏折(12分)} 
+\noindent\textbf{(6.1)(8分)}结合\textbf{定理2与小问（5.2）}给出光子的轨迹方程；\\
+ 
+\paragraph{}
+广义相对论预言光线会受到时空弯曲影响而偏折，1919年 爱丁顿带队观测星光恰掠过太阳的星体在日全食时的视位置，与在夜间的视位置相比测量出偏折角$\delta$。在几何单位制下，$M_s=1.5 \mathrm{km}$,太阳半径$r_0=7 \times 10^5 \mathrm{km}$\\
+ \textbf{(6.2)(2分)}与牛顿力学给出的\\
+\begin{equation}
+    (\frac{\rmd r}{\rmd \varphi})^2+r^2 =\frac{2M}{L^2}r^3+\frac{2E_0}{L^2}r^4
+\end{equation}
+对比，说明精确测量星光骗折能否证伪广义相对论或牛顿引力论?\\
+\textbf{(6.3)(2分)}由上问的轨迹方程可以近似给出星光过太阳后偏折角的大小
+\begin{equation}
+    \delta=2\int_{r_o}^\infty\frac{\rmd r}{r \sqrt{(\frac{r}{r_0})^2-1}}\frac{M_s}{r}(1+\frac{r^2}{r_0(r+r_0)})
+\end{equation}
+\textbf{不用}严格计算，估出偏折角的量级。
+
+%这里是末尾
+    % \newpage
+    % \begin{center}s
+    %     {\CJKfamily{SimSun}\bfseries\fontsize{40pt}{40pt}\selectfont 以下空白}
+    % \end{center}
+
+
+
+\end{document}
+
