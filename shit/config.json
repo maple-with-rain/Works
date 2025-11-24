@@ -1,0 +1,7 @@
+{
+  "search_keywords": ["Python教程", "编程学习"],
+  "monitor_keywords": ["教程", "入门", "基础"],
+  "wechat_contact": "文件传输助手",
+  "check_interval": 1800,
+  "max_results": 5
+}
