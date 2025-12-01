@@ -1,7 +1,7 @@
 {
-  "search_keywords": ["Python教程", "编程学习", "计算机科学"],
-  "wechat_contact": "文件传输助手",
-  "check_interval": 1800,
+  "search_keywords": [ "♿"],
+  "wechat_contact": "Nuys",
+  "check_interval": 300,
   "send_count": 3,
-  "max_retries": 3
+  "max_retries": 100
 }

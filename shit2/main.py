@@ -1,3 +1,9 @@
+###使用说明：
+###1. 联系人，关键词等可在config.json修改
+###2. 运行前请打开微信
+###3. 50行处需要需要填入一个没用的联系人
+###4. 未完成品，仅能发送搜索框中出现的前几个视频
+###
 import requests
 import json
 import time
@@ -7,44 +13,65 @@ from datetime import datetime
 import logging
 import pyautogui
 import re
+from urllib.parse import quote
+import webbrowser
+import subprocess
 
 class WeChatController:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
-        
+    
+    def _set_clipboard(self, text):
+        try:
+            subprocess.run([
+                'powershell', '-NoProfile', '-Command',
+                'Set-Clipboard -Value ([Console]::In.ReadToEnd())'
+            ], input=str(text).encode('utf-8'), check=True)
+            return True
+        except Exception as e:
+            self.logger.error(f"设置剪贴板失败: {e}")
+            return False
+    
+    def paste_text(self, text):
+        if self._set_clipboard(text):
+            time.sleep(0.2)
+            pyautogui.hotkey('ctrl', 'v')
+            time.sleep(0.2)
+
     def send_message(self, contact_name, message):
-        """发送微信消息"""
         try:
             self.logger.info(f"准备发送消息给: {contact_name}")
-            
-            # 激活微信
             pyautogui.hotkey('ctrl', 'alt', 'w')
             time.sleep(3)
-            
-            # 搜索联系人
             pyautogui.hotkey('ctrl', 'f')
             time.sleep(1)
             pyautogui.hotkey('ctrl', 'a')
             pyautogui.press('backspace')
-            pyautogui.write(contact_name)
-            time.sleep(2)
+            self.paste_text("雨枫")###此处可以填入一个没用的联系人，否则会无法正常运行
+            time.sleep(1)
             pyautogui.press('enter')
-            time.sleep(2)
-            
-            # 发送消息
+            time.sleep(1)
+            pyautogui.hotkey('ctrl', 'f')
+            time.sleep(1)
+            pyautogui.hotkey('ctrl', 'a')
+            pyautogui.press('backspace')
+            self.paste_text(contact_name)
+            time.sleep(0.8)
+            # 尝试进入首个搜索结果会话（多轮按键兜底）
+            try:
+                pyautogui.press('enter')
+                time.sleep(0.6)
+            except Exception:
+                time.sleep(0.5)
             messages = self.split_message(message)
             for msg in messages:
-                pyautogui.write(msg, interval=0.05)
+                self.paste_text(msg)
                 time.sleep(0.5)
                 pyautogui.press('enter')
                 time.sleep(1)
-            
-            # 返回
             pyautogui.hotkey('ctrl', 'alt', 'w')
-            
             self.logger.info("消息发送成功")
             return True
-            
         except Exception as e:
             self.logger.error(f"发送失败: {e}")
             try:
@@ -54,14 +81,11 @@ class WeChatController:
             return False
 
     def split_message(self, message, max_length=100):
-        """分割长消息"""
         if len(message) <= max_length:
             return [message]
-        
         lines = message.split('\n')
         result = []
         current_message = ""
-        
         for line in lines:
             if len(current_message) + len(line) + 1 > max_length:
                 if current_message:
@@ -72,11 +96,114 @@ class WeChatController:
                     current_message += "\n" + line
                 else:
                     current_message = line
-        
         if current_message:
             result.append(current_message.strip())
-        
         return result
+
+class HumanSearcher:
+    def __init__(self, logger):
+        self.logger = logger
+        self.host = "https://www.bilibili.com"
+        try:
+            from selenium import webdriver
+            from selenium.webdriver.common.by import By
+            from selenium.webdriver.chrome.options import Options
+            from selenium.webdriver.support.ui import WebDriverWait
+            from selenium.webdriver.support import expected_conditions as EC
+            self.webdriver = webdriver
+            self.By = By
+            self.Options = Options
+            self.WebDriverWait = WebDriverWait
+            self.EC = EC
+        except Exception as e:
+            self.webdriver = None
+            self.logger.error(f"selenium 不可用: {e}")
+    
+    def search(self, keyword, send_count=3):
+        if not self.webdriver:
+            try:
+                webbrowser.open(f"https://search.bilibili.com/video?keyword={quote(keyword)}")
+            except Exception:
+                pass
+            return []
+        opts = self.Options()
+        opts.add_argument("--disable-blink-features=AutomationControlled")
+        opts.add_argument("--start-maximized")
+        driver = self.webdriver.Chrome(options=opts)
+        try:
+            driver.get(f"https://search.bilibili.com/video?keyword={quote(keyword)}")
+            self.WebDriverWait(driver, 20).until(self.EC.presence_of_element_located((self.By.CSS_SELECTOR, "a[href*='/video/']")))
+            time.sleep(random.uniform(2, 4))
+            selectors = [
+                "a[href*='/video/']",
+                ".bili-video-card .bili-video-card__info--tit a",
+                ".video-item a[href*='/video/']",
+                "li.video-item .title a",
+                "div.vod-list a[href*='/video/']"
+            ]
+            urls = []
+            titles = {}
+            for sel in selectors:
+                anchors = driver.find_elements(self.By.CSS_SELECTOR, sel)
+                for a in anchors:
+                    href = a.get_attribute("href") or ""
+                    if not href:
+                        continue
+                    if href.startswith("/"):
+                        href = self.host + href
+                    if "/video/" not in href:
+                        continue
+                    if href not in urls:
+                        urls.append(href)
+                        t = (a.get_attribute("title") or a.text or "").strip()
+                        t = re.sub(r"\s+", " ", t)
+                        titles[href] = t
+                if len(urls) >= send_count:
+                    break
+            if len(urls) < send_count:
+                for _ in range(3):
+                    driver.execute_script("window.scrollBy(0, document.documentElement.scrollHeight/2);")
+                    time.sleep(random.uniform(1, 2))
+                    anchors = driver.find_elements(self.By.CSS_SELECTOR, "a[href*='/video/']")
+                    for a in anchors:
+                        href = a.get_attribute("href") or ""
+                        if not href:
+                            continue
+                        if href.startswith("/"):
+                            href = self.host + href
+                        if "/video/" not in href:
+                            continue
+                        if href not in urls:
+                            urls.append(href)
+                            t = (a.get_attribute("title") or a.text or "").strip()
+                            t = re.sub(r"\s+", " ", t)
+                            titles[href] = t
+                        if len(urls) >= send_count:
+                            break
+                    if len(urls) >= send_count:
+                        break
+            results = []
+            for href in urls[:send_count]:
+                results.append({
+                    'bvid': '',
+                    'title': titles.get(href, '') or '',
+                    'author': '',
+                    'url': href,
+                    'view': 0,
+                    'like': 0,
+                    'duration': '',
+                    'pubdate': int(time.time())
+                })
+            self.logger.info(f"人类搜索获取 {len(results)} 个视频")
+            return results
+        except Exception as e:
+            self.logger.error(f"搜索异常: {e}")
+            return []
+        finally:
+            try:
+                driver.quit()
+            except Exception:
+                pass
 
 class SimpleBilibiliMonitor:
     def __init__(self, config_file='config.json'):
@@ -111,6 +238,7 @@ class SimpleBilibiliMonitor:
         
         # 初始化微信控制
         self.wechat = WeChatController()
+        self.human = HumanSearcher(self.logger)
         
         self.logger.info("简单B站监控器初始化完成")
 
@@ -120,6 +248,7 @@ class SimpleBilibiliMonitor:
             with open(config_file, 'r', encoding='utf-8') as f:
                 config = json.load(f)
             self.logger.info("配置文件加载成功")
+            config.setdefault('mode', 'human')
             return config
         except:
             # 默认配置
@@ -128,7 +257,8 @@ class SimpleBilibiliMonitor:
                 "wechat_contact": "文件传输助手",
                 "check_interval": 1800,  # 30分钟检查一次
                 "send_count": 3,        # 每次发送3个视频
-                "max_retries": 3        # 最大重试次数
+                "max_retries": 3,        # 最大重试次数
+                "mode": "human"
             }
             with open(config_file, 'w', encoding='utf-8') as f:
                 json.dump(default_config, f, ensure_ascii=False, indent=2)
@@ -139,7 +269,7 @@ class SimpleBilibiliMonitor:
         try:
             with open('processed_videos.json', 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                self.processed_videos = set(data.get('processed_videos', []))
+                self.processed_videos = set(x for x in data.get('processed_videos', []) if x)
             self.logger.info(f"加载了 {len(self.processed_videos)} 个已处理视频")
         except:
             self.processed_videos = set()
@@ -181,7 +311,7 @@ class SimpleBilibiliMonitor:
             if response.status_code == 412:
                 self.logger.warning("触发风控，等待后重试...")
                 if retry_count < self.config.get('max_retries', 3):
-                    time.sleep(30)
+                    time.sleep(3)
                     return self.search_bilibili_direct(keyword, retry_count + 1)
                 else:
                     return []
@@ -224,23 +354,42 @@ class SimpleBilibiliMonitor:
         """发送单个视频到微信"""
         contact = self.config.get('wechat_contact', '文件传输助手')
         
-        # 格式化发布时间
-        pub_date = datetime.fromtimestamp(video_info['pubdate']).strftime('%Y-%m-%d %H:%M')
-        
-        # 格式化时长
-        duration = self.format_duration(video_info['duration'])
-        
-        message = f"""🎬 推荐视频 - {keyword}
-
-标题: {video_info['title']}
-
-UP主: {video_info['author']}
-播放: {video_info['view']} | 点赞: {video_info['like']}
-时长: {duration} | 发布时间: {pub_date}
-
-链接: {video_info['url']}
-
-推荐时间: {datetime.now().strftime("%Y-%m-%d %H:%M")}"""
+        pub_date = datetime.fromtimestamp(video_info.get('pubdate', int(time.time()))).strftime('%Y-%m-%d %H:%M')
+        duration_raw = video_info.get('duration')
+        duration = self.format_duration(duration_raw) if duration_raw else None
+        title = (video_info.get('title') or '').strip()
+        author = (video_info.get('author') or '').strip()
+        view = video_info.get('view')
+        like = video_info.get('like')
+        url = video_info.get('url') or ''
+        lines = []
+        lines.append(f"🎬 推荐视频 - {keyword}")
+        if title:
+            lines.append("")
+            lines.append(f"标题: {title}")
+        if author:
+            lines.append("")
+            lines.append(f"UP主: {author}")
+        stats = []
+        if isinstance(view, int) and view > 0:
+            stats.append(f"播放: {view}")
+        if isinstance(like, int) and like > 0:
+            stats.append(f"点赞: {like}")
+        if stats:
+            lines.append("\n" + " | ".join(stats))
+        time_info = []
+        if duration:
+            time_info.append(f"时长: {duration}")
+        if pub_date:
+            time_info.append(f"发布时间: {pub_date}")
+        if time_info:
+            lines.append("\n" + " | ".join(time_info))
+        if url:
+            lines.append("")
+            lines.append(f"链接: {url}")
+        lines.append("")
+        lines.append(f"推荐时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+        message = "\n".join(lines)
         
         success = self.wechat.send_message(contact, message)
         return success
@@ -274,8 +423,10 @@ UP主: {video_info['author']}
         for keyword in self.config['search_keywords']:
             self.logger.info(f"处理关键词: {keyword}")
             
-            # 搜索视频
-            videos = self.search_bilibili_direct(keyword)
+            if self.config.get('mode', 'human') == 'human':
+                videos = self.human.search(keyword, self.config.get('send_count', 3))
+            else:
+                videos = self.search_bilibili_direct(keyword)
             
             if not videos:
                 self.logger.warning(f"未找到关键词 '{keyword}' 的视频")
@@ -284,8 +435,8 @@ UP主: {video_info['author']}
             # 发送视频
             sent_count = 0
             for video in videos:
-                # 检查是否已发送过
-                if video['bvid'] in self.processed_videos:
+                processed_key = video.get('bvid') or video.get('url') or ''
+                if processed_key in self.processed_videos:
                     self.logger.info(f"跳过已发送视频: {video['title'][:30]}...")
                     continue
                 
@@ -293,7 +444,8 @@ UP主: {video_info['author']}
                 
                 # 发送到微信
                 if self.send_video_to_wechat(video, keyword):
-                    self.processed_videos.add(video['bvid'])
+                    if processed_key:
+                        self.processed_videos.add(processed_key)
                     sent_count += 1
                     total_sent += 1
                     self.logger.info("✅ 视频发送成功")

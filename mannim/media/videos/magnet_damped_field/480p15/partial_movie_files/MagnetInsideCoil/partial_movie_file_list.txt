@@ -1,0 +1,2 @@
+# This file is used internally by FFMPEG.
+file 'file:E:/maple-with-rain/Works/mannim/media/videos/magnet_damped_field/480p15/partial_movie_files/MagnetInsideCoil/3143764424_1210940475_3239201558.mp4'
